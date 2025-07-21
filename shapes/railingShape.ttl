@@ -1,0 +1,27 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> . 
+
+@prefix ex: <http://example.org/geometryrelations#> . 
+
+@prefix beo: <https://pi.pauwel.be/voc/buildingelement#> . 
+
+  
+
+# SHACL Shape for beo:Stair instances 
+
+ex:StairShape 
+
+    a sh:NodeShape ; 
+
+    sh:targetClass beo:Stair ; 
+
+    sh:property [ 
+
+        sh:path ex:touches3D ; 
+
+        sh:class beo:Railing ; 
+
+        sh:minCount 1 ; 
+
+        sh:maxCount 2 ; 
+
+    ] . 

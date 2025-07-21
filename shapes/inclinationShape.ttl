@@ -1,0 +1,219 @@
+@prefix inst: <http://example.org/> . 
+
+@prefix props: <https://w3id.org/props#> . 
+
+@prefix schema: <http://schema.org/> . 
+
+@prefix sh: <http://www.w3.org/ns/shacl#> . 
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
+
+ 
+
+schema:Slopes a sh:NodeShape ; 
+
+sh:targetClass <https://pi.pauwel.be/voc/buildingelement#RampFlight> ; 
+
+sh:message "Art. 19 - The slope of a rampflight can be at most 10% when the difference in height is less than 100 mm. The slope of a rampflight can be at most 8.3% when the difference in height lies between 100 and 250 mm. The slope of a rampflight can be at most 6.25% when the difference in height lies between 250 and 500 mm. The slope of a rampflight can be at most 5% when the difference in height is more than 500 mm." ; 
+
+sh:or ( 
+
+    [ 
+
+        sh:and ( 
+
+            [ 
+
+                sh:expression [ 
+
+                    inst:lessThan ( 
+
+                        [ 
+
+                            inst:slope ( 
+
+                                [ sh:path (props:heightIfcRampFlight schema:value) ] 
+
+                                [ sh:path (props:lengthIfcRampFlight schema:value) ] 
+
+                            ) 
+
+                        ] 
+
+                        10 
+
+                    ) 
+
+                ] 
+
+            ] 
+
+            sh:node schema:SlopeConstraint10 
+
+        ) 
+
+    ] 
+
+     
+
+    [ 
+
+        sh:and ( 
+
+            [ 
+
+                sh:expression [ 
+
+                    inst:lessThan ( 
+
+                        [ 
+
+                            inst:slope ( 
+
+                                [ sh:path (props:heightIfcRampFlight schema:value) ] 
+
+                                [ sh:path (props:lengthIfcRampFlight schema:value) ] 
+
+                            ) 
+
+                        ] 
+
+                    8.3 
+
+                    ) 
+
+                ] 
+
+            ] 
+
+            sh:node schema:SlopeConstraint8 
+
+        ) 
+
+    ] 
+
+    [ 
+
+        sh:and ( 
+
+            [ 
+
+                sh:expression [ 
+
+                    inst:lessThan ( 
+
+                        [ 
+
+                            inst:slope ( 
+
+                                [ sh:path (props:heightIfcRampFlight schema:value) ] 
+
+                                [ sh:path (props:lengthIfcRampFlight schema:value) ] 
+
+                            ) 
+
+                        ] 
+
+                    6.25 
+
+                    ) 
+
+                ] 
+
+            ]     
+
+            sh:node schema:SlopeConstraint6 
+
+        ) 
+
+    ] 
+
+    [ 
+
+        sh:and ( 
+
+            [ 
+
+                sh:expression [ 
+
+                    inst:lessThan ( 
+
+                        [ 
+
+                            inst:slope ( 
+
+                                [ sh:path (props:heightIfcRampFlight schema:value) ] 
+
+                                [ sh:path (props:lengthIfcRampFlight schema:value) ] 
+
+                            ) 
+
+                        ] 
+
+                    5 
+
+                    ) 
+
+                ] 
+
+            ] 
+
+            sh:node schema:SlopeConstraint5 
+
+        ) 
+
+    ] 
+
+) . 
+
+ 
+
+schema:SlopeConstraint10 a sh:NodeShape ; 
+
+    sh:property [ 
+
+        sh:path (props:heightIfcRampFlight schema:value) ; 
+
+        sh:maxInclusive "100"^^xsd:double ; 
+
+    ] . 
+
+     
+
+schema:SlopeConstraint8 a sh:NodeShape ; 
+
+    sh:property [ 
+
+        sh:path (props:heightIfcRampFlight schema:value) ; 
+
+        sh:minInclusive "100"^^xsd:double ; 
+
+        sh:maxInclusive "250"^^xsd:double ; 
+
+    ] . 
+
+     
+
+schema:SlopeConstraint6 a sh:NodeShape ; 
+
+    sh:property [ 
+
+        sh:path (props:heightIfcRampFlight schema:value) ; 
+
+        sh:minInclusive "250"^^xsd:double ; 
+
+        sh:maxInclusive "500"^^xsd:double ; 
+
+    ] . 
+
+ 
+
+schema:SlopeConstraint5 a sh:NodeShape ; 
+
+    sh:property [ 
+
+        sh:path (props:heightIfcRampFlight schema:value) ; 
+
+        sh:minInclusive "500"^^xsd:double ; 
+
+    ] . 

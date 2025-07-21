@@ -1,0 +1,49 @@
+ex:BedroomToFireEscapeShape 
+
+    a sh:NodeShape ; 
+
+    sh:targetClass ex:Bedroom ; 
+
+    sh:sparql [ 
+
+        a sh:SPARQLConstraint ; 
+
+        sh:message "There must be at least one path from the Bedroom to a FireEscape that does not pass through a Kitchen." ; 
+
+        sh:select """ 
+
+            PREFIX ex: <http://example.org#> 
+
+            PREFIX bot: <http://example.org/buildingOntology#> 
+
+ 
+
+            SELECT $this 
+
+            WHERE { 
+
+                # Find all zones along the path from Bedroom to FireEscape 
+
+                ?this bot:adjacentZone* ?zoneOnPath . 
+
+ 
+
+                # Ensure none of the zones on the path are Kitchens 
+
+                FILTER NOT EXISTS { 
+
+                    ?zoneOnPath a ex:Kitchen . 
+
+                } 
+
+ 
+
+                # Ensure the path ends in a FireEscape 
+
+                ?zoneOnPath a ex:FireEscape . 
+
+            } 
+
+        """ ; 
+
+    ] . 
